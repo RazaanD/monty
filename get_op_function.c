@@ -1,25 +1,18 @@
 #include "monty.h"
-
 /**
- * get_op_func - select the correct operation function asked by user
- * @s: operator argument
- 
- *
- * Return: function pointer corresponding to operator given
- *
-int (*get_op_func(char *s))(int)
+* free_stack - frees a doubly linked list
+* @head: head of the stack
 */
-void (*get_op_func(char *s))(stack_t**, unsigned int)
+void free_stack(stack_t *head)
 {
-	instruction_t ops[] = {
-		{"push", op_push},
-		{"pall", op_pall},
-		{"pint", op_pint}, /*Add new functions on here*/
-		{NULL, NULL}
-	};
-	int i = 0;
+	stack_t *aux;
 
-	while (ops[i].opcode != NULL && strcmp((ops[i].opcode), s))
-		i++;
-	return (ops[i].f);
+	aux = head;
+	
+	while (head)
+	{
+		aux = head->next;
+		free(head);
+		head = aux;
+	}
 }
